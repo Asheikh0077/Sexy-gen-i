@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GenI - News Feed</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #eafaf1;
+      color: #2c5234;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    header {
+      background-color: #c8f2d0;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #146c43;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #146c43;
+      font-weight: 500;
+    }
+
+    .search-bar {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+
+    .search-bar input {
+      width: 80%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 12px;
+      background-color: #ffffff;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      outline: none;
+    }
+
+    .search-bar input:focus {
+      border: 2px solid #34c47c;
+    }
+
+    .feed-container {
+      max-width: 800px;
+      margin: 3rem auto;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .post {
+      padding: 1.5rem;
+      border-bottom: 1px solid #e0f5ea;
+      margin-bottom: 1rem;
+      border-radius: 12px;
+      background-color: #fafafa;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .post:hover {
+      transform: scale(1.02);
+      background-color: #f0f8f0;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .user-info img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .user-info img:hover {
+      transform: scale(1.1);
+    }
+
+    .content {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #2c5234;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #719b87;
+    }
+
+    .actions .like, .actions .comment, .actions .share {
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
+    }
+
+    .actions .like:hover, .actions .comment:hover, .actions .share:hover {
+      color: #34c47c;
+    }
+
+    /* Trending Section */
+    .trending-section {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #34c47c;
+      border-radius: 8px;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .trending-section h3 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    .load-more {
+      background-color: #34c47c;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      border-radius: 12px;
+      margin-top: 2rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .load-more:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #c8f2d0;
+      text-align: center;
+      padding: 1rem;
+      color: #146c43;
+      font-size: 0.9rem;
+      border-top: 2px solid #34c47c;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: #146c43;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      color: #34c47c;
+    }
+
+    /* Dark Mode */
+    .dark-mode {
+      background-color: #2c2c2c;
+      color: white;
+    }
+
+    .dark-mode header {
+      background-color: #444;
+    }
+
+    .dark-mode footer {
+      background-color: #444;
+    }
+
+    .dark-mode .post {
+      background-color: #333;
+      color: white;
+    }
+
+    .dark-mode .post:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>GenI</h1>
+  <nav>
+    <a href="profile.html">Profile</a>
+    <a href="messages.html">Messages</a>
+    <a href="notifications.html">Notifications</a>
+    <a href="settings.html">Settings</a>
+    <button id="dark-mode-toggle">🌙</button>
+  </nav>
+</header>
+
+<div class="search-bar">
+  <input type="text" id="search" placeholder="Search GenI..." />
+</div>
+
+<div class="feed-container">
+  <!-- Trending Section -->
+  <div class="trending-section">
+    <h3>Trending Topics</h3>
+    <ul>
+      <li>#AIRevolution</li>
+      <li>#TechTalk</li>
+      <li>#GenICommunity</li>
+      <li>#StartUpLife</li>
+    </ul>
+  </div>
+
+  <!-- Posts -->
+  <div class="post">
+    <div class="user-info">
+      <img src="https://via.placeholder.com/40" alt="User 1" title="View Profile">
+      <strong>John Doe</strong>
+      <span>@johndoe</span>
+    </div>
+    <div class="content">
+      <p>Exploring the possibilities of AI today! Excited about what's next. #Tech #Innovation</p>
+    </div>
+    <div class="actions">
+      <span class="like">👍 Like</span>
+      <span class="comment">💬 Comment</span>
+      <span class="share">🔗 Share</span>
+    </div>
+  </div>
+
+  <div class="post">
+    <div class="user-info">
+      <img src="https://via.placeholder.com/40" alt="User 2" title="View Profile">
+      <strong>Alice Smith</strong>
+      <span>@alice_smith</span>
+    </div>
+    <div class="content">
+      <p>Just launched my new startup! So pumped! 🚀 Let's talk business! #Entrepreneur #StartupLife</p>
+    </div>
+    <div class="actions">
+      <span class="like">👍 Like</span>
+      <span class="comment">💬 Comment</span>
+      <span class="share">🔗 Share</span>
+    </div>
+  </div>
+
+  <!-- Load More Button -->
+  <div class="load-more" onclick="alert('Load more posts...')">Load More</div>
+</div>
+
+<footer>
+  <a href="privacy.html">Privacy</a>
+  <a href="terms.html">Terms</a>
+  <a href="about.html">About</a>
+</footer>
+
+<script>
+  // Dark Mode Toggle
+  document.getElementById('dark-mode-toggle').addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+  });
+</script>
+
+</body>
+</html>

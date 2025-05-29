@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gen-I - Notifications</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --color-bg-light: #f0f4f8;
+      --color-text-light: #1a1a1a;
+      --color-bg-dark: #1e272e;
+      --color-text-dark: #eee;
+      --color-primary: #00f2fe;
+      --color-primary-dark: #0d6efd;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--color-bg-dark);
+      color: var(--color-text-dark);
+      min-height: 100vh;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    body.light-mode {
+      background: var(--color-bg-light);
+      color: var(--color-text-light);
+    }
+
+    header {
+      background: #1a1a2e;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: background 0.4s ease;
+    }
+
+    body.light-mode header {
+      background: #f8f9fa;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--color-primary);
+      margin: 0;
+    }
+
+    body.light-mode header h1 {
+      color: var(--color-primary-dark);
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    body.light-mode nav a {
+      color: var(--color-text-light);
+    }
+
+    nav a:hover {
+      color: var(--color-primary);
+    }
+
+    body.light-mode nav a:hover {
+      color: var(--color-primary-dark);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #1e272e;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    body.light-mode .container {
+      background: #fff;
+      color: var(--color-text-light);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .header-row h2 {
+      margin: 0;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    body.light-mode .header-row h2 {
+      color: var(--color-primary-dark);
+    }
+
+    select, button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    select {
+      background: #2f3640;
+      color: #fff;
+    }
+
+    body.light-mode select {
+      background: #e9ecef;
+      color: var(--color-text-light);
+    }
+
+    button {
+      background: var(--color-primary);
+      color: #000;
+      border: 2px solid var(--color-primary);
+    }
+
+    button:hover {
+      background: transparent;
+      color: var(--color-primary);
+    }
+
+    body.light-mode button {
+      background: var(--color-primary-dark);
+      color: #fff;
+      border: 2px solid var(--color-primary-dark);
+    }
+
+    body.light-mode button:hover {
+      background: transparent;
+      color: var(--color-primary-dark);
+    }
+
+    .notification {
+      background: #2f3640;
+      padding: 1rem;
+      border-left: 5px solid var(--color-primary);
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    body.light-mode .notification {
+      background: #f8f9fa;
+      color: var(--color-text-light);
+      border-left-color: var(--color-primary-dark);
+    }
+
+    .notification:hover {
+      transform: scale(1.02);
+      background-color: #353b48;
+    }
+
+    body.light-mode .notification:hover {
+      background-color: #e2e6ea;
+    }
+
+    .notification time {
+      font-size: 0.9rem;
+      color: #aaa;
+      display: block;
+      margin-top: 0.3rem;
+    }
+
+    body.light-mode .notification time {
+      color: #555;
+    }
+
+    .notification strong {
+      color: var(--color-primary);
+    }
+
+    body.light-mode .notification strong {
+      color: var(--color-primary-dark);
+    }
+
+    footer {
+      background: #1a1a2e;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+      color: var(--color-primary);
+      font-size: 0.9rem;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    body.light-mode footer {
+      background: #f8f9fa;
+      color: var(--color-primary-dark);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Gen<span style="color: white;">I</span></h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="profile.html">Profile</a>
+    <a href="messages.html">Messages</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="header-row">
+    <h2>🔔 Notifications</h2>
+    <div>
+      <select id="filter-select" aria-label="Filter notifications">
+        <option value="all">All Notifications</option>
+        <option value="mentions">Mentions</option>
+        <option value="system">System Alerts</option>
+        <option value="courses">Course Updates</option>
+      </select>
+      <button id="dark-mode-toggle" aria-label="Toggle dark mode">Toggle Dark Mode</button>
+    </div>
+  </div>
+
+  <div id="notifications-list">
+    <!-- Notifications will be inserted here -->
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 Gen-I. All rights reserved.
+</footer>
+
+<script>
+  // Initial notifications data
+  const notifications = [
+    { id: 1, type: 'mentions', text: '<strong>@codegirl</strong> commented on your post: "Loved your insights on LLMs!"', time: '2 minutes ago' },
+    { id: 2, type: 'system', text: '<strong>New Course</strong> "Intro to Quantum Computing" is now available!', time: '1 hour ago' },
+    { id: 3, type: 'mentions', text: '<strong>@mentor_john</strong> replied to your message.', time: 'Yesterday' },
+    { id: 4, type: 'system', text: '<strong>Reminder:</strong> AI Ethics Webinar starts in 30 mins.', time: 'Today at 3:30 PM' },
+    { id: 5, type: 'mentions', text: '<strong>@ai.creator</strong> tagged you in a discussion.', time: '2 days ago' },
+  ];
+
+  const notificationsList = document.getElementById('notifications-list');
+  const filterSelect = document.getElementById('filter-select');
+  const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+  // Render notifications filtered by type
+  function renderNotifications(filter = 'all') {
+    notificationsList.innerHTML = '';
+    const filtered = filter === 'all' ? notifications : notifications.filter(n => n.type === filter);
+    if(filtered.length === 0) {
+      notificationsList.innerHTML = '<p>No notifications found.</p>';
+      return;
+    }
+    filtered.forEach(n => {
+      const div = document.createElement('div');
+      div.classList.add('notification');
+      div.innerHTML = `
+        <p>${n.text}</p>
+        <time>${n.time}</time>
+      `;
+      notificationsList.appendChild(div);
+    });
+  }
+
+  filterSelect.addEventListener('change', () => {
+    renderNotifications(filterSelect.value);
+  });
+
+  // Dark mode toggle logic
+  function applyDarkMode(dark) {
+    if(dark) {
+      document.body.classList.remove('light-mode');
+      darkModeToggle.textContent = 'Switch to Light Mode';
+    } else {
+      document.body.classList.add('light-mode');
+      darkModeToggle.textContent = 'Switch to Dark Mode';
+    }
+    localStorage.setItem('geni-darkmode', dark ? 'dark' : 'light');
+  }
+
+  darkModeToggle.addEventListener('click', () => {
+    const isDark = !document.body.classList.contains('light-mode');
+    applyDarkMode(!isDark);
+  });
+
+  // Load dark mode preference
+  window.addEventListener('load', () => {
+    const savedMode = localStorage.getItem('geni-darkmode');
+    if(savedMode === 'light') {
+      applyDarkMode(false);
+    } else {
+      applyDarkMode(true);
+    }
+    renderNotifications('all');
+    simulateRealtimeNotifications();
+  });
+
+  // Simulated real-time notifications (adds one every 10 seconds)
+  let nextId = notifications.length + 1;
+  const simulatedMessages = [
+    { type: 'mentions', text: '<strong>@newuser</strong> started following you.', time: 'Just now' },
+    { type: 'system', text: '<strong>System:</strong> Scheduled maintenance tonight at 11 PM.', time: 'Just now' },
+    { type: 'courses', text: '<strong>Course Update:</strong> "Advanced AI" course now open for enrollment!', time: 'Just now' },
+    { type: 'mentions', text: '<strong>@janedoe</strong> liked your post.', time: 'Just now' }
+  ];
+
+  function simulateRealtimeNotifications() {
+    setInterval(() => {
+      const random = simulatedMessages[Math.floor(Math.random() * simulatedMessages.length)];
+      const newNotif = {
+        id: nextId++,
+        type: random.type,
+        text: random.text,
+        time: 'Just now'
+      };
+      notifications.unshift(newNotif);
+      if(filterSelect.value === 'all' || filterSelect.value === newNotif.type) {
+        renderNotifications(filterSelect.value);
+      }
+    }, 10000);
+  }
+</script>
+
+</body>
+</html>
